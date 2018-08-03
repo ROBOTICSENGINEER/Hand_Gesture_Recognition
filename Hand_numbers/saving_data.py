@@ -7,12 +7,13 @@ current_dir = os.getcwd()
 
 STATES = ['ZERO' , 'ONE' , 'TWO' , 'THREE' , 'FOUR' , 'FIVE']
 
-print('reading 0 from test set')
-names = os.listdir('./images/test/ZERO')
+
+print('reading 0 from train set')
+names = os.listdir('./images/train/ZERO')
 N=len(names)
 x0 = numpy.empty((N,16384), int)
 for k in range(N):
-  address = current_dir + '/images/test/ZERO/' + names[k]
+  address = current_dir + '/images/train/ZERO/' + names[k]
   #print(k, ' / ' , N, '\t=\t', k/N)
   pic = cv2.imread(address,0)
   resized = numpy.rint((cv2.resize(pic, (128,128), interpolation = cv2.INTER_AREA))/255)
@@ -21,12 +22,12 @@ for k in range(N):
 y0=numpy.zeros((N, 1), dtype=numpy.int)
 
 
-print('reading 1 from test set')
-names = os.listdir('./images/test/ONE')
+print('reading 1 from train set')
+names = os.listdir('./images/train/ONE')
 N=len(names)
 x1 = numpy.empty((N,16384), int)
 for k in range(N):
-  address = current_dir + '/images/test/ONE/' + names[k]
+  address = current_dir + '/images/train/ONE/' + names[k]
   #print(k, ' / ' , N, '\t=\t', k/N)
   pic = cv2.imread(address,0)
   resized = numpy.rint((cv2.resize(pic, (128,128), interpolation = cv2.INTER_AREA))/255)
@@ -35,12 +36,12 @@ for k in range(N):
 y1=numpy.ones((N, 1), dtype=numpy.int)
 
 
-print('reading 2 from test set')
-names = os.listdir('./images/test/TWO')
+print('reading 2 from train set')
+names = os.listdir('./images/train/TWO')
 N=len(names)
 x2 = numpy.empty((N,16384), int)
 for k in range(N):
-  address = current_dir + '/images/test/TWO/' + names[k]
+  address = current_dir + '/images/train/TWO/' + names[k]
   #print(k, ' / ' , N, '\t=\t', k/N)
   pic = cv2.imread(address,0)
   resized = numpy.rint((cv2.resize(pic, (128,128), interpolation = cv2.INTER_AREA))/255)
@@ -50,12 +51,12 @@ y2=numpy.ones((N, 1), dtype=numpy.int)*2
 
 
 
-print('reading 3 from test set')
-names = os.listdir('./images/test/THREE')
+print('reading 3 from train set')
+names = os.listdir('./images/train/THREE')
 N=len(names)
 x3 = numpy.empty((N,16384), int)
 for k in range(N):
-  address = current_dir + '/images/test/THREE/' + names[k]
+  address = current_dir + '/images/train/THREE/' + names[k]
   #print(k, ' / ' , N, '\t=\t', k/N)
   pic = cv2.imread(address,0)
   resized = numpy.rint((cv2.resize(pic, (128,128), interpolation = cv2.INTER_AREA))/255)
@@ -65,12 +66,12 @@ y3=numpy.ones((N, 1), dtype=numpy.int)*3
 
 
 
-print('reading 4 from test set')
-names = os.listdir('./images/test/FOUR')
+print('reading 4 from train set')
+names = os.listdir('./images/train/FOUR')
 N=len(names)
 x4 = numpy.empty((N,16384), int)
 for k in range(N):
-  address = current_dir + '/images/test/FOUR/' + names[k]
+  address = current_dir + '/images/train/FOUR/' + names[k]
   #print(k, ' / ' , N, '\t=\t', k/N)
   pic = cv2.imread(address,0)
   resized = numpy.rint((cv2.resize(pic, (128,128), interpolation = cv2.INTER_AREA))/255)
@@ -80,12 +81,12 @@ y4=numpy.ones((N, 1), dtype=numpy.int)*4
 
 
 
-print('reading 5 from test set')
-names = os.listdir('./images/test/FIVE')
+print('reading 5 from train set')
+names = os.listdir('./images/train/FIVE')
 N=len(names)
 x5 = numpy.empty((N,16384), int)
 for k in range(N):
-  address = current_dir + '/images/test/FIVE/' + names[k]
+  address = current_dir + '/images/train/FIVE/' + names[k]
   #print(k, ' / ' , N, '\t=\t', k/N)
   pic = cv2.imread(address,0)
   resized = numpy.rint((cv2.resize(pic, (128,128), interpolation = cv2.INTER_AREA))/255)
@@ -94,13 +95,14 @@ for k in range(N):
 y5=numpy.ones((N, 1), dtype=numpy.int)*5
 
 
-print('concatenate test set')
-X_test = numpy.concatenate((x0,x1,x2,x3,x4,x5), axis=0)
-Y_test = numpy.concatenate((y0,y1,y2,y3,y4,y5), axis=0)
+print('concatenate train set')
+X_train = numpy.concatenate((x0,x1,x2,x3,x4,x5), axis=0)
+Y_train = numpy.concatenate((y0,y1,y2,y3,y4,y5), axis=0)
 
-print('saving test set as binary')
-numpy.save('test_data.npy', X_test)
-numpy.save('test_label.npy', Y_test)
+print('saving train set as binary')
+numpy.save('train_data.npy', X_train)
+numpy.save('train_label.npy', Y_train)
+
 
 
 print('reading 0 from test set')
